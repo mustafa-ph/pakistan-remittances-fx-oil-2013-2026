@@ -1,0 +1,13 @@
+Series,Spec,N,Lags_BIC,ADF_t,CV_5pct,Result
+ln(Remit_SA),Const+Trend,157,2,-2.554,-3.44,Non-stationary
+ln(GCC_Total),Const+Trend,158,1,-3.671,-3.44,5%
+ln(West_Anglo_EU),Const+Trend,158,1,-4.405,-3.44,1%
+ln(USDPKR_mean),Const+Trend,158,1,-2.077,-3.44,Non-stationary
+ln(Brent_USD),Const,157,1,-2.876,-2.88,10%
+USDPKR_Daily_Vol_Pct,Const,159,0,-7.798,-2.88,1%
+Seasonal_Log_Pct,Const,155,4,-8.706,-2.88,1%
+d_ln(Remit_SA),Const,154,4,-7.856,-2.88,1%
+d_ln(GCC_Total),Const,155,3,-8.837,-2.88,1%
+d_ln(West_Anglo_EU),Const,154,4,-7.759,-2.88,1%
+d_ln(USDPKR),Const,157,1,-7.432,-2.88,1%
+d_ln(Brent_USD),Const,156,2,-8.452,-2.88,1%

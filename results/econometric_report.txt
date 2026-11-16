@@ -1,0 +1,71 @@
+=== REGIME SUMMARY ===
+                                Months  Remit_Total_Mean_MUSD  Remit_SA_Mean_MUSD  GCC_Share_Pct  West_Share_Pct  USDPKR_Mean  USDPKR_Daily_Vol_Pct  USDPKR_Monthly_Range_Pct  Brent_Mean_USD  Seasonal_Ratio_Eid  Seasonal_Ratio_NonEid
+Regime                                                                                                                                                                                                                                  
+1_Managed_Peg_2013_2017             54               1549.808            1550.658         62.636          31.198      103.565                 0.116                     0.929          68.290               1.002                  0.998
+2_Float_COVID_2018_2021             48               2087.050            2086.067         58.430          34.467      148.875                 0.276                     2.173          62.494               1.018                  0.997
+3_FX_Crisis_2022_2023Aug            20               2346.396            2335.618         52.790          42.097      233.352                 0.576                     5.759          91.723               1.008                  1.002
+4_FX_Stability_2023Sep_2026Oct      38               3178.352            3177.106         54.209          41.177      280.263                 0.038                     0.556          78.880               1.059                  0.989
+
+=== CRISIS (2022-2023Aug) VS FX STABILITY (2023Sep-2026Oct) TESTS ===
+               Metric  Crisis_Mean  Stability_Mean      Diff  Welch_t  Welch_p  MW_U_p
+      Total_Cash_Flow   2346.39574      3178.35212 831.95638  7.54776  0.00000 0.00000
+        Remit_SA_MUSD   2335.61850      3177.10632 841.48782  9.01448  0.00000 0.00000
+ USDPKR_vol_daily_pct      0.57620         0.03775  -0.53845 -5.57147  0.00002 0.00000
+     USDPKR_range_pct      5.75859         0.55588  -5.20271 -4.65811  0.00015 0.00000
+        GCC_Share_Pct     52.78960        54.20871   1.41911  2.54669  0.01643 0.01382
+Seasonal_Factor_Ratio      1.00358         0.99977  -0.00380 -0.20692  0.83734 0.70065
+
+=== CHOW STRUCTURAL BREAK TEST ON ln(Remit_SA) ===
+Sep 2023 Chow F-stat = 14.874, p-value = 1.223273e-06
+Quandt-Andrews Max F-stat = 34.903 at 2022-10-01 (p = 2.966516e-13)
+
+=== EID SEASONALITY PERSISTENCE (Dep: 100*ln(Total/SA), R2=0.048, N=160) ===
+             Variable    Coef  HAC_SE  t_stat  p_value
+            Intercept -0.3655  0.7229 -0.5055   0.6139
+       Eid_Fitr_Month  1.5019  1.4556  1.0318   0.3038
+       Eid_Adha_Month  0.9486  1.0175  0.9323   0.3526
+         Post_Sep2023 -0.9008  1.1209 -0.8037   0.4228
+Eid_Any_x_PostSep2023  5.6218  2.8468  1.9748   0.0501
+
+=== LEVEL MODEL: 100*ln(Remit_SA) (R2=0.885, Adj-R2=0.881, N=158) ===
+              Variable     Coef  HAC_SE  t_stat  p_value
+             Intercept 704.3043 20.5891 34.2076   0.0000
+            Time_Trend   0.6353  0.0623 10.2027   0.0000
+Post_Sep2023_Stability  -1.1213  7.9079 -0.1418   0.8874
+   Crisis_2022_2023Aug -10.2348  7.4330 -1.3769   0.1706
+  USDPKR_Daily_Vol_Pct  -5.5370  4.0332 -1.3729   0.1718
+            ln_Brent_t  11.0620  6.5533  1.6880   0.0935
+    ln_Brent_t_minus_2  -8.1218  6.4222 -1.2646   0.2080
+
+=== GROWTH MODEL: Total SA (R2=0.046, N=158) ===
+            Variable    Coef  HAC_SE  t_stat  p_value
+           Intercept  0.1642  1.3234  0.1241   0.9014
+         d_ln_USDPKR -0.3045  0.2400 -1.2690   0.2064
+USDPKR_Daily_Vol_Pct  4.2433  4.5733  0.9278   0.3550
+        d_ln_Brent_t  0.1607  0.0807  1.9909   0.0483
+       d_ln_Brent_t1  0.0347  0.1113  0.3116   0.7558
+       d_ln_Brent_t2  0.0015  0.0971  0.0155   0.9877
+       Eid_Any_Month -3.2184  2.9292 -1.0987   0.2736
+        Post_Sep2023  1.4542  1.2601  1.1540   0.2503
+
+=== GROWTH MODEL: GCC Corridors (R2=0.130, N=158) ===
+            Variable    Coef  HAC_SE  t_stat  p_value
+           Intercept -0.0669  1.4966 -0.0447   0.9644
+         d_ln_USDPKR -1.0165  0.3781 -2.6884   0.0080
+USDPKR_Daily_Vol_Pct 10.9083  4.8756  2.2373   0.0267
+        d_ln_Brent_t  0.2062  0.1377  1.4980   0.1362
+       d_ln_Brent_t1  0.1183  0.1497  0.7899   0.4308
+       d_ln_Brent_t2  0.0075  0.1567  0.0481   0.9617
+       Eid_Any_Month -8.4206  3.8371 -2.1945   0.0297
+        Post_Sep2023  2.3615  1.8286  1.2914   0.1985
+
+=== GROWTH MODEL: West Corridors (R2=0.047, N=158) ===
+            Variable    Coef  HAC_SE  t_stat  p_value
+           Intercept  0.4798  1.4939  0.3212   0.7485
+         d_ln_USDPKR -0.1272  0.3079 -0.4131   0.6801
+USDPKR_Daily_Vol_Pct  3.2740  4.5872  0.7137   0.4765
+        d_ln_Brent_t  0.1562  0.1096  1.4254   0.1561
+       d_ln_Brent_t1  0.1900  0.1319  1.4404   0.1518
+       d_ln_Brent_t2 -0.1184  0.1511 -0.7837   0.4344
+       Eid_Any_Month -3.6401  4.2201 -0.8626   0.3898
+        Post_Sep2023  0.9413  1.7203  0.5472   0.5851
