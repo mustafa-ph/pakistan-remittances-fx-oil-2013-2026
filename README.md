@@ -15,13 +15,13 @@
 │   │   ├── Seasonally Adjusted Workers Remittances.csv
 │   │   └── POILBREUSDM.csv
 │   └── processed/
-│       ├── Pakistan_Remittances_Corridors_Monthly_1972_2026.csv   # 652 monthly obs (Jul 1972 – Oct 2026)
-│       ├── Pakistan_FX_Daily_2013_2026.csv                        # 3,275 daily obs (Jul 2013 – Oct 2026)
-│       └── Pakistan_Remittances_FX_Oil_Master_Monthly_2013_2026.csv # 160 monthly obs (Jul 2013 – Oct 2026)
+│       ├── Pakistan_Remittances_Corridors_Monthly_1972_2026.csv   # 652 monthly records (Jul 1972 – Oct 2026)
+│       ├── Pakistan_FX_Daily_2013_2026.csv                        # 3,275 daily records (Jul 2013 – Oct 2026)
+│       └── Pakistan_Remittances_FX_Oil_Master_Monthly_2013_2026.csv # 160 monthly records (Jul 2013 – Oct 2026)
 ├── scripts/
-│   ├── 01_build_master_datasets.py   # Cleans & harmonizes SBP & FRED raw files (0 missing months)
-│   ├── 02_econometric_analysis.py    # ADF tests, regime tests, Chow/Sup-F breaks, Newey-West HAC OLS
-│   └── 03_generate_figures.py        # Publication-grade 300 DPI figures
+│   ├── 01_build_master_datasets.py   # Cleans and merges the SBP & FRED raw files (0 missing months)
+│   ├── 02_econometric_analysis.py    # Runs stationarity tests, structural breaks, and regressions
+│   └── 03_generate_figures.py        # Generates the 5 final charts (300 DPI)
 ├── results/
 │   ├── adf_stationarity_tests.csv
 │   ├── corridor_breakdown_crisis_vs_stability.csv
@@ -46,19 +46,21 @@
 ```
 
 ## Data Sources
-1. **State Bank of Pakistan (SBP) — Country-wise Workers' Remittances (`Homeremit_Arch.xlsx`)**: Monthly inflows in Million USD (Jul 1972 – Oct 2026). Includes Roshan Digital Account (RDA) conversions from September 2020 and remitter-country-basis classification from July 2019.
+1. **State Bank of Pakistan (SBP) — Country-wise Workers' Remittances (`Homeremit_Arch.xlsx`)**: Monthly inflows in Million USD (Jul 1972 – Oct 2026). This includes Roshan Digital Account (RDA) conversions starting in September 2020.
 2. **State Bank of Pakistan (SBP) EasyData — Seasonally Adjusted Workers' Remittances**: X12-ARIMA seasonally adjusted monthly series (Jul 2005 – Oct 2026).
 3. **State Bank of Pakistan (SBP) — Daily Average Banks' Floating Exchange Rates (`BFER_Daily_Arch.xlsx`)**: Daily PKR exchange rates across 23 currencies (Jul 2, 2013 – Oct 30, 2026).
 4. **FRED (`POILBREUSDM`)**: Monthly Global Price of Brent Crude, USD/barrel (Jan 1992 – Sep 2026).
 5. **Hijri Calendar Dates (2013–2026)**: Verified Eid-ul-Fitr and Eid-ul-Adha dates from [InfoPlease Islamic Holidays (2010–2030)](https://www.infoplease.com/calendars/holidays/islamic-holidays).
 
-## Key Empirical Findings
-1. **Permanent Formalization Surge & Volatility Collapse**: Post-September 2023 FX stabilization reduced daily USD/PKR volatility 15× from **0.576%/day** (Jan 2022–Aug 2023 crisis) to **0.038%/day** (Sep 2023–Oct 2026, Welch *t* = -5.57, *p* < 0.0001). Seasonally adjusted remittances rose **+$841.5M/month** ($2,335.6M to $3,177.1M, *p* < 0.0001), with a Chow structural break at September 2023 (*F* = 14.87, *p* = 1.22e-6).
-2. **GCC Corridors Rebounded Most**: GCC inflows rose **+38.9%** (UAE +59.5%, Saudi Arabia +37.0%). In Newey-West HAC growth regressions, sudden PKR depreciation depresses GCC inflows (`-1.017`, *p* = 0.008), while Western corridors (USA, UK, EU) show no significant FX sensitivity (*p* = 0.680).
-3. **Eid Seasonality Amplified in Formal Channels**: Formal Eid-month surges (`Total / SA`) widened to **+5.9% above trend** in 2023–2026 vs. **+0.8%** during the FX crisis (`Eid × Post-Sep 2023 = +5.62%`, *p* = 0.0501).
-4. **Oil-Cycle Link**: Contemporaneous Brent crude growth shows a modest positive link with seasonally adjusted total remittance growth (`+0.161`, *p* = 0.048).
+## My Key Findings
+* **A real shift into formal banking:** After September 2023, daily USD/PKR volatility dropped 15×—from **0.576%/day** during the 2022–2023 crisis down to **0.038%/day** (*p* < 0.0001). At the same time, seasonally adjusted remittances jumped by **+$841.5M/month** (from $2,335.6M to $3,177.1M), with a clear structural break right at September 2023.
+* **Gulf countries rebounded the most:** Inflows from GCC countries rose **+38.9%** (UAE +59.5%, Saudi Arabia +37.0%). My regressions show that sudden PKR drops hurt GCC inflows (`-1.017`, *p* = 0.008), while Western corridors (USA, UK, EU) barely react to exchange rate swings (*p* = 0.680).
+* **Bigger Eid spikes in formal channels:** Once the exchange rate stabilized, formal Eid-month surges jumped to **+5.9% above trend** in 2023–2026, compared to just **+0.8%** during the FX crisis.
+* **A modest link to oil prices:** Monthly changes in Brent crude prices have a small, positive connection to overall remittance growth (`+0.161`, *p* = 0.048).
 
-## Reproducibility
+## How to Run This Yourself
+If you want to reproduce my datasets, analysis, and charts from scratch, just install the dependencies and run the three scripts in order:
+
 ```bash
 pip install -r requirements.txt
 python scripts/01_build_master_datasets.py
